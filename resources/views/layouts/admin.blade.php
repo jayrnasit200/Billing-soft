@@ -18,6 +18,17 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
+  <!-- DataTables -->
+
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/jquery.dataTables.min.css') }}">
+ <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+
     @yield('css')
 </head>
 <body>
@@ -83,7 +94,7 @@
                   <!-- Add icons to the links using the .nav-icon class
                        with font-awesome or any other icon font library -->
                   <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link {{ (request()->segment(1) == '') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
                         Dashboard
@@ -91,9 +102,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon far fa-circle text-info"></i>
-                      <p>Informational</p>
+                    <a href="{{url('/brand')}}" class="nav-link {{ (request()->segment(1) == 'brand') ? 'active' : '' }}">
+                      <i class="nav-icon fab fa-cloudsmith "></i>
+                      <p>Brand</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -116,6 +127,24 @@
 
           <!-- Content Wrapper. Contains page content -->
           <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                  <div class="row mb-2">
+                    <div class="col-sm-6">
+                      <h1>{{$title}}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                      <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div><!-- /.container-fluid -->
+              </section>
+                 @if(session()->get('status'))
+                        <body onload="successtogal('{{ session()->get('status') }}')"></body>
+                  @endif
              @yield('content')
               </div>
           <!-- /.content-wrapper -->
@@ -133,12 +162,39 @@
         </div>
            
 
+        <script src="{{ asset('assets/custom.js') }}"></script>
         <!-- jQuery -->
         <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
         <!-- Bootstrap -->
         <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE -->
+        <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
-        @yield('css')
+         <script type="text/javascript">
+            $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+
+        </script>
+        <!-- Toastr -->
+            <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+          <script type="text/javascript">
+            function successtogal(msg){
+            toastr.success(msg);
+            }
+          </script>
+          <!-- Select2 -->
+      <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+      <script>
+        $(function () {
+          //Initialize Select2 Elements
+          $('.select2').select2();
+        });
+
+        </script>
+
+        @yield('js')
+        <div class="modal fade" id="confirm_model" role="dialog"></div>
+      </body>
 
 </html>
