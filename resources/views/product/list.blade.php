@@ -28,7 +28,13 @@
                   <thead>
                   <tr>
                     <th>No</th>
+                    <th>Product Name</th>
                     <th>Brand Name</th>
+                    <th>quantity</th>
+                    <th>MRP</th>
+                    <th>rate</th>
+                    <th>HSN</th>
+                    <th>GST</th>
                     <th>ststus</th>
                     <th>Engine version</th>
                   </tr>
@@ -37,7 +43,7 @@
                   $delete_action="brand/delete/";
                    @endphp
                   <tbody>
-                  @foreach($brands as $valu)
+                  @foreach($product as $valu)
                  <tr>
                     <td>{{$no++}}</td>
                     <td>{{$valu->name}}</td>

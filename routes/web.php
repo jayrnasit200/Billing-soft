@@ -20,8 +20,18 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// brand
 Route::get('/brand', [App\Http\Controllers\BrandController::class, 'index'])->name('brand');
 Route::post('/brand/delete/', [App\Http\Controllers\BrandController::class, 'delete']);
 Route::get('/brand/create', [App\Http\Controllers\BrandController::class, 'create']);
 Route::post('/brand/create_submit', [App\Http\Controllers\BrandController::class, 'submit_create']);
 Route::get('/brand/edit/{id}', [App\Http\Controllers\BrandController::class, 'edit']);
+Route::post('/brand/create_update', [App\Http\Controllers\BrandController::class, 'submit_update']);
+
+// product
+Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
+Route::post('/product/delete/', [App\Http\Controllers\ProductController::class, 'delete']);
+Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create']);
+Route::post('/product/create_submit', [App\Http\Controllers\ProductController::class, 'submit_create']);
+Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit']);
+Route::post('/product/create_update', [App\Http\Controllers\ProductController::class, 'submit_update']);

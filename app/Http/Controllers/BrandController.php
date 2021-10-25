@@ -41,6 +41,26 @@ class BrandController extends Controller
     }
     public function edit($id)
     {
+        $data = DB::table('brand')->where('id', request()->id)->first();
+        // print_r($data);
+        // exit;
+        return view('Brand/edit',['title' => 'Brand Edit','data'=>$data]);
         
+    }
+    public function submit_update()
+    {
+        // print_r(request()->all());
+        // exit;
+        $id =request()->id;
+        $this->validate(request(), [
+            "Brand_name" => "required|unique:brand,name,$id",
+            "ststus" => "required",
+        ]);
+        DB::table('brand')->where('id', $id)->update([
+            'name' => request()->Brand_name,
+            'ststus' => request()->ststus,
+            ]);
+        return redirect('brand')->with('status', 'Brand update Created');;
+
     }
 }
