@@ -1,12 +1,6 @@
 @extends('layouts.admin')
 
 @section('css')
-<!-- DataTables -->
-
- <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
- <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
- <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
- <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/jquery.dataTables.min.css') }}">
 
 @endsection
 @section('content')
@@ -23,10 +17,23 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
-                                <label  class="col-sm-2 col-form-label">Brand Name</label>
+                                <label  class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control @error('Brand_name') is-invalid @enderror" name="Brand_name" placeholder="Brand Name" value="{{ old('Brand_name') }}" />
+                                    <input type="text" class="form-control @error('Brand_name') is-invalid @enderror" name="Brand_name" placeholder="Product Name" value="{{ old('Brand_name') }}" />
                                     @error('Brand_name')<span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label  class="col-sm-2 col-form-label">Brand</label>
+                                <div class="col-sm-10">
+                                      <select class="form-control select2" name="brand">
+                                        <option selected="selected" value="">Select Brand</option>
+                                        @foreach(get_all_brand() as $val)
+                                        <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @endforeach
+                                      </select>
+                                    @error('ststus')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 

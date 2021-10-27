@@ -94,7 +94,7 @@
                   <!-- Add icons to the links using the .nav-icon class
                        with font-awesome or any other icon font library -->
                   <li class="nav-item menu-open">
-                    <a href="#" class="nav-link {{ (request()->segment(1) == '') ? 'active' : '' }}">
+                    <a href="{{url('/')}}" class="nav-link {{ (request()->segment(1) == '') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
                         Dashboard
@@ -107,6 +107,13 @@
                       <p>Brand</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{url('/product')}}" class="nav-link {{ (request()->segment(1) == 'product') ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-boxes"></i>
+                      <p>Products</p>
+                    </a>
+                  </li>
+
                   <li class="nav-item">
                     <a class="nav-link"  href="{{ route('logout') }}"
    onclick="event.preventDefault();    document.getElementById('logout-form').submit();" role="button">

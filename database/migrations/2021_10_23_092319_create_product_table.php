@@ -16,10 +16,10 @@ class CreateProductTable extends Migration
         Schema::create('product', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('quantity');
-            $table->string('MRP');
-            $table->string('rate');
-            $table->string('HSN');
+            $table->integer('quantity');
+            $table->double('MRP',20,0);
+            $table->double('rate',20,0);
+            $table->string('HSN')->nullable();
             $table->integer('GST');
             $table->integer('Brand');
             $table->enum('ststus', ['available', 'not_Available']);

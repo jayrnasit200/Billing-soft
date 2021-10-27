@@ -30,7 +30,7 @@
                     <th>No</th>
                     <th>Brand Name</th>
                     <th>ststus</th>
-                    <th>Engine version</th>
+                    <th>Actions</th>
                   </tr>
                   </thead>
                   @php $no=1;

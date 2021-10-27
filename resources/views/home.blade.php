@@ -9,7 +9,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-        <!-- box-1 -->
+            <!-- box-1 -->
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-header border-0">
@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-        <!-- end box-1 -->
-        <!-- box-2 -->
+            <!-- end box-1 -->
+            <!-- box-2 -->
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-header border-0">
@@ -46,8 +46,8 @@
                     </div>
                 </div>
             </div>
-        <!-- end box-2 -->
-        <!-- box-3 -->
+            <!-- end box-2 -->
+            <!-- box-3 -->
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-header border-0">
@@ -65,8 +65,8 @@
                     </div>
                 </div>
             </div>
-        <!-- end box-3 -->
-        <!-- box-4 -->
+            <!-- end box-3 -->
+            <!-- box-4 -->
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-header border-0">
@@ -84,10 +84,9 @@
                     </div>
                 </div>
             </div>
-        <!-- end box-4 -->
+            <!-- end box-4 -->
         </div>
         <!-- end row -->
-
 
         <div class="row">
             <div class="col-lg-6">
@@ -326,6 +325,7 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /.content -->
+
 
 @endsection
 

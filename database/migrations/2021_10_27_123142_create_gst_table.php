@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class GST extends Migration
+class CreateGstTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class GST extends Migration
      */
     public function up()
     {
-         Schema::create('gst', function (Blueprint $table) {
+        Schema::create('gst', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('valu');
-
             $table->timestamps();
         });
     }
@@ -29,7 +26,6 @@ class GST extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
-        
+        Schema::dropIfExists('gst');
     }
 }

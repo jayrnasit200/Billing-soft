@@ -19,7 +19,7 @@
                  <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{ $title }} List</h3>
-                <a href="{{url('brand/create')}}" class="btn btn-outline-info btn-default float-right">Create Brand</a>
+                <a href="{{url('product/create')}}" class="btn btn-outline-info btn-default float-right">Create Product</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -36,7 +36,7 @@
                     <th>HSN</th>
                     <th>GST</th>
                     <th>ststus</th>
-                    <th>Engine version</th>
+                    <th>Actions</th>
                   </tr>
                   </thead>
                   @php $no=1;
@@ -47,6 +47,12 @@
                  <tr>
                     <td>{{$no++}}</td>
                     <td>{{$valu->name}}</td>
+                    <td>{{$valu->Brand}}</td>
+                    <td>{{$valu->quantity}}</td>
+                    <td>{{$valu->MRP}}</td>
+                    <td>{{$valu->rate}}</td>
+                    <td>{{$valu->HSN}}</td>
+                    <td>{{$valu->GST}}</td>
                     <td>{{$valu->ststus}}</td>
                     <td> <a class="btn btn-default dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
