@@ -13,6 +13,14 @@
 		        return DB::table('brand')->select('id','name')->get();
 		    }
 		}
+
+		if (!function_exists('get_all_gst')) {
+		    function get_all_gst()
+		    {
+		        return DB::table('gst')->select('id','name','valu')->get();
+		    }
+		}
+		
 		
 		
 ?>
