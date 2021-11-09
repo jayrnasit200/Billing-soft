@@ -30,8 +30,17 @@ Route::post('/brand/create_update', [App\Http\Controllers\BrandController::class
 
 // product
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
-// Route::post('/product/delete/', [App\Http\Controllers\ProductController::class, 'delete']);
+Route::post('/product/delete/', [App\Http\Controllers\ProductController::class, 'delete']);
 Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create']);
-// Route::post('/product/create_submit', [App\Http\Controllers\ProductController::class, 'submit_create']);
-// Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit']);
-// Route::post('/product/create_update', [App\Http\Controllers\ProductController::class, 'submit_update']);
+Route::post('/product/create_submit', [App\Http\Controllers\ProductController::class, 'submit_create']);
+Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit']);
+Route::post('/product/create_update', [App\Http\Controllers\ProductController::class, 'submit_update']);
+
+
+// bill
+Route::get('/bill', [App\Http\Controllers\AddBillsController::class, 'index'])->name('bills');
+// Route::post('/bill/delete/', [App\Http\Controllers\AddBillsController::class, 'delete']);
+Route::get('/bill/create', [App\Http\Controllers\AddBillsController::class, 'create']);
+Route::post('/bill/create_submit', [App\Http\Controllers\AddBillsController::class, 'submit_create']);
+// Route::get('/bill/edit/{id}', [App\Http\Controllers\AddBillsController::class, 'edit']);
+// Route::post('/bill/create_update', [App\Http\Controllers\AddBillsController::class, 'submit_update']);

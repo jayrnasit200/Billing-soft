@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerTable extends Migration
+class CreateAddBillTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('add_bill', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('contact');
-            $table->text('Address');
-            $table->string('gst');
-
+            $table->string('client_name');
+            $table->string('bill_no');
+            $table->date('bill_date');
+            $table->string('bill_gst');
+            $table->integer('payment_id');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateCustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('add_bill');
     }
 }

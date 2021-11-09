@@ -19,7 +19,7 @@
                  <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{ $title }} List</h3>
-                <a href="{{url('product/create')}}" class="btn btn-outline-info btn-default float-right">Create Product</a>
+                <a href="{{url('bill/create')}}" class="btn btn-outline-info btn-default float-right">Create Bill</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

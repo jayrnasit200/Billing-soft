@@ -20,6 +20,13 @@
 		        return DB::table('gst')->select('id','name','valu')->get();
 		    }
 		}
+
+		if (!function_exists('current_date_time')) {
+		    function current_date_time()
+		    {
+		        return date("Y-m-d")." ". date("h:i:s");
+		    }
+		}
 		
 		
 		

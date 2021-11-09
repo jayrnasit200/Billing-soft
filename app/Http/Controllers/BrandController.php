@@ -35,6 +35,8 @@ class BrandController extends Controller
         DB::table('brand')->insert([
             'name' => request()->Brand_name,
             'ststus' => request()->ststus,
+            'created_at' => current_date_time(),
+            'updated_at' => current_date_time(),
             ]);
         return redirect('brand')->with('status', 'Brand Success Created');;
 
@@ -59,6 +61,7 @@ class BrandController extends Controller
         DB::table('brand')->where('id', $id)->update([
             'name' => request()->Brand_name,
             'ststus' => request()->ststus,
+            'updated_at' => current_date_time(),
             ]);
         return redirect('brand')->with('status', 'Brand update Created');;
 
