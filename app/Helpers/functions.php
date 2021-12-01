@@ -27,6 +27,12 @@
 		        return date("Y-m-d")." ". date("h:i:s");
 		    }
 		}
+		if (!function_exists('get_all_products')) {
+		    function get_all_products()
+		    {
+		        return DB::table('product')->where('ststus', 'available')->select('id','name','quantity','MRP','rate','GST')->get();
+		    }
+		}
 		
 		
 		

@@ -122,6 +122,13 @@
                   </li>
 
                   <li class="nav-item">
+                    <a href="{{url('/sell')}}" class="nav-link {{ (request()->segment(1) == 'sell') ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-money-bill-wave"></i>
+                      <p>Sell</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
                     <a class="nav-link"  href="{{ route('logout') }}"
    onclick="event.preventDefault();    document.getElementById('logout-form').submit();" role="button">
 

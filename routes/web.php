@@ -39,8 +39,18 @@ Route::post('/product/create_update', [App\Http\Controllers\ProductController::c
 
 // bill
 Route::get('/bill', [App\Http\Controllers\AddBillsController::class, 'index'])->name('bills');
-// Route::post('/bill/delete/', [App\Http\Controllers\AddBillsController::class, 'delete']);
+Route::post('/bill/delete/', [App\Http\Controllers\AddBillsController::class, 'delete']);
 Route::get('/bill/create', [App\Http\Controllers\AddBillsController::class, 'create']);
 Route::post('/bill/create_submit', [App\Http\Controllers\AddBillsController::class, 'submit_create']);
-// Route::get('/bill/edit/{id}', [App\Http\Controllers\AddBillsController::class, 'edit']);
-// Route::post('/bill/create_update', [App\Http\Controllers\AddBillsController::class, 'submit_update']);
+Route::get('/bill/edit/{id}', [App\Http\Controllers\AddBillsController::class, 'edit']);
+Route::post('/bill/update_submit', [App\Http\Controllers\AddBillsController::class, 'submit_update']);
+
+// sell
+Route::get('/sell', [App\Http\Controllers\SellController::class, 'index'])->name('bills');
+Route::post('/getproductdata', [App\Http\Controllers\SellController::class, 'getproductdata']);
+Route::post('/getallproductdata', [App\Http\Controllers\SellController::class, 'getallproductdata']);
+// Route::post('/sell/delete/', [App\Http\Controllers\SellController::class, 'delete']);
+Route::get('/sell/create', [App\Http\Controllers\SellController::class, 'create']);
+// Route::post('/sell/create_submit', [App\Http\Controllers\SellController::class, 'submit_create']);
+// Route::get('/sell/edit/{id}', [App\Http\Controllers\SellController::class, 'edit']);
+// Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 'submit_update']);
