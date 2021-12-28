@@ -18,7 +18,13 @@ class CreateSellTable extends Migration
             $table->integer('client_id');
             $table->date('bill_date');
             $table->integer('payment_id');
+            $table->double('sum_amount', 8, 2);
+            $table->double('Gst_Total', 8, 2);
+            $table->double('Paid_amount', 8, 2);
+            $table->double('Due_Total', 8, 2);
+            $table->double('totel_amount', 8, 2);
             $table->enum('Payment_type', ['cheque', 'cash', 'credit_card']);
+            $table->enum('Payment_status', ['Full_Payment', 'Advance_Payment', 'No_Payment']);
             $table->timestamps();
         });
     }

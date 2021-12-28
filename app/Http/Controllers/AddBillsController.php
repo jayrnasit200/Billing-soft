@@ -95,7 +95,7 @@ class AddBillsController extends Controller
         ]);
         DB::table('payment')->where('id', request()->paym_id)->update([
                 'amount' => request()->bill_amount,
-                'system' => 'credit',
+                'system' => 'debit',
                 'Payment_ststus' => request()->ststus,
                 'created_at' => current_date_time(),
                 'updated_at' => current_date_time(),

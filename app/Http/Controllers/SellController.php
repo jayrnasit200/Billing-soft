@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB; 
-
+use App\Rules\CheckSelProductlRule;
+ 
 class SellController extends Controller
 {
     public function index()
@@ -36,38 +37,70 @@ class SellController extends Controller
         return view('sell/create',['title' => 'Sell Create']);
         
     }
-    // public function submit_create()
-    // {
-    // //    print_r(request()->all());
-    // //    exit;
-    //     $this->validate(request(), [
-    //         "bil_no" => "required|unique:add_bill,bill_no",
-    //         "c_name" => "required",
-    //         "bill_date" => "required|date_format:Y-m-d",
-    //         "bill_amount" => "required|numeric|min:0",
-    //         "bill_gst" => "required",
-    //         "ststus" => "required",
-    //     ]);
-    //     $payment_id = DB::table('payment')->insertGetId([
-    //             'amount' => request()->bill_amount,
-    //             'system' => 'credit',
-    //             'Payment_ststus' => request()->ststus,
-    //             'created_at' => current_date_time(),
-    //             'updated_at' => current_date_time(),
-    //             ]);
-    //         echo $payment_id;
-    //     DB::table('add_bill')->insert([
-    //         'client_name' => request()->c_name,
-    //         'bill_no' => request()->bil_no,
-    //         'bill_gst' => request()->bill_gst,
-    //         'bill_date' => request()->bill_date,
-    //         'payment_id' => $payment_id,
-    //         'created_at' => current_date_time(),
-    //         'updated_at' => current_date_time(),
-    //         ]);
-    //     return redirect('bill')->with('status', 'Bills Success Created');;
+    public function submit_create()
+    {
+    //     echo "<pre>";
+    //    print_r(request()->all());
 
-    // }
+    //    exit;
+       
+        $this->validate(request(), [
+            "Client_name" => "required_if:Select_client,==,old_Client",
+            "new_c_name" => "required_if:Select_client,==,new_Client",
+            "client_contact" => "required_if:Select_client,==,new_Client",
+            "client_gst" => "required_if:Select_client,==,new_Client",
+            "client_addres" => "required_if:Select_client,==,new_Client",
+            'productName.*' => [ "required",
+                new CheckSelProductlRule()
+            ]
+        ],[
+            'productName.*.required' => 'The product field is required',
+        ]);
+        // print_r(request()->Select_client);
+        if(request()->Select_client == "new_Client"){
+            // new
+            // $clinent_id = DB::table('sell_client')->insertGetId([
+            //                 'client_name' => request()->new_c_name,
+            //                 'client_Contact' => request()->client_contact,
+            //                 'client_address' => request()->client_addres,
+            //                 'client_gst_no' => request()->client_gst,
+            //                 'created_at' => current_date_time(),
+            //                 'updated_at' => current_date_time(),
+            //                 ]);
+            $clinent_id= "1" ;
+        }else{
+            $clinent_id=request()->Client_name;
+        }
+        // $payempt_id = DB::table('payment')->insertGetId([
+        //     'amount' => request()->totalAmount,
+        //     'system' => "credit",
+        //     'Payment_ststus' => "available",
+        //     'created_at' => current_date_time(),
+        //     'updated_at' => current_date_time(),
+        //     ]);
+        $clinent_id= "3" ;
+            
+        // $payempt_id = DB::table('payment')->insertGetId([
+        //     'amount' => request()->totalAmount,
+        //     'system' => "credit",
+        //     'Payment_ststus' => "available",
+        //     'created_at' => current_date_time(),
+        //     'updated_at' => current_date_time(),
+        //     ]);
+       exit;
+        
+        // DB::table('add_bill')->insert([
+        //     'client_name' => request()->c_name,
+        //     'bill_no' => request()->bil_no,
+        //     'bill_gst' => request()->bill_gst,
+        //     'bill_date' => request()->bill_date,
+        //     'payment_id' => $payment_id,
+        //     'created_at' => current_date_time(),
+        //     'updated_at' => current_date_time(),
+        //     ]);
+        // return redirect('bill')->with('status', 'Bills Success Created');
+
+    }
     // public function edit($id)
     // {
     //     $bills['title'] = 'Brand Edit';

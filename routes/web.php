@@ -51,6 +51,6 @@ Route::post('/getproductdata', [App\Http\Controllers\SellController::class, 'get
 Route::post('/getallproductdata', [App\Http\Controllers\SellController::class, 'getallproductdata']);
 // Route::post('/sell/delete/', [App\Http\Controllers\SellController::class, 'delete']);
 Route::get('/sell/create', [App\Http\Controllers\SellController::class, 'create']);
-// Route::post('/sell/create_submit', [App\Http\Controllers\SellController::class, 'submit_create']);
+Route::post('/sell/create_submit', [App\Http\Controllers\SellController::class, 'submit_create']);
 // Route::get('/sell/edit/{id}', [App\Http\Controllers\SellController::class, 'edit']);
 // Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 'submit_update']);

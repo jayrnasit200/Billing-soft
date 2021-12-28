@@ -13,14 +13,14 @@
                         <h3 class="card-title">{{ $title }}</h3>
                     </div>
                     <!-- /.card-header -->
-                    <form class="form-horizontal" method="post" action="{{ url('/bill/create_submit') }}">
+                    <form class="form-horizontal" method="post" action="{{ url('/sell/create_submit') }}">
                         @csrf
                         <div class="card-body">
                         <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Order Date</label>
                                 <div class="col-sm-10">
-                                    <input type="date"  class="form-control @error('bill_date') is-invalid @enderror" name="bill_date" placeholder="bill_date" value="{{ old('bill_date') }}" />
-                                    @error('bill_date')<span class="text-danger">{{ $message }}</span>@enderror
+                                    <input type="date"  class="form-control @error('sell_date') is-invalid @enderror" name="sell_date" placeholder="sell_date" value="{{ old('sell_date') }}" />
+                                    @error('sell_date')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 
@@ -28,13 +28,13 @@
                                 <label  class="col-sm-2 col-form-label">Client </label>
                                 <div class="col-sm-5">
                                         <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="old_Client" value="old_Client" name="Select_client" checked>
+                                        <input type="radio" class="custom-control-input" id="old_Client" value="old_Client" name="Select_client" @if (old('Select_client') != "new_Client") checked @endif >
                                         <label class="custom-control-label" for="old_Client">Old Client</label>
                                     </div>
                                 </div>
                                         <div class="col-sm-5">
                                             <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="new_Client" value="new_Client" name="Select_client" >
+                                            <input type="radio" class="custom-control-input" id="new_Client" value="new_Client" name="Select_client" @if (old('Select_client') == "new_Client") checked @endif>
                                             <label class="custom-control-label" for="new_Client">New Client</label>
                                         </div>
                                         </div>
@@ -44,26 +44,26 @@
                             <div class="form-group row" id="old_client_select">
                                 <label  class="col-sm-2 col-form-label">Select Client</label>
                                 <div class="col-sm-10">
-                                      <select class="form-control select2" name="gst">
+                                      <select class="form-control select2" name="Client_name">
                                       <option value="" selected>Select Client</option>
                                       <option value="111" >jay</option>
                                       </select>
-                                    @error('gst')
+                                    @error('Client_name')
                                     <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Client Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" disabled class="form-control @error('c_name') is-invalid @enderror" id="c_name" name="c_name" placeholder="Client Name" value="{{ old('c_name') }}" />
-                                    @error('c_name')<span class="text-danger">{{ $message }}</span>@enderror
+                                    <input type="text" readonly class="form-control @error('new_c_name') is-invalid @enderror" id="c_name" name="new_c_name" placeholder="Client Name" value="{{ old('new_c_name') }}" />
+                                    @error('new_c_name')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Client Contact</label>
                                 <div class="col-sm-10">
-                                    <input type="text" disabled id="client_contact" class="form-control @error('client_contact') is-invalid @enderror" name="client_contact" placeholder="Client Contact" value="{{ old('client_contact') }}" />
+                                    <input type="text" readonly id="client_contact" class="form-control @error('client_contact') is-invalid @enderror" name="client_contact" placeholder="Client Contact" value="{{ old('client_contact') }}" />
                                     @error('client_contact')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Client GST No</label>
                                 <div class="col-sm-10">
-                                    <input type="text" disabled id="client_gst" class="form-control @error('client_gst') is-invalid @enderror" name="client_gst" placeholder="Client GST No" value="{{ old('client_gst') }}" />
+                                    <input type="text" readonly id="client_gst" class="form-control @error('client_gst') is-invalid @enderror" name="client_gst" placeholder="Client GST No" value="{{ old('client_gst') }}" />
                                     @error('client_gst')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Client Address</label>
                                 <div class="col-sm-10">
-                                    <textarea disabled id="client_addres" name="client_addres" rows="3" placeholder="Client Address" class="form-control @error('client_addres') is-invalid @enderror" >{{ old('client_addres') }}</textarea>
+                                    <textarea readonly id="client_addres" name="client_addres" rows="3" placeholder="Client Address" class="form-control @error('client_addres') is-invalid @enderror" >{{ old('client_addres') }}</textarea>
                                 
                                     @error('client_addres')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
@@ -94,7 +94,8 @@
                                 <tr>
                                     <th style="width: 40%;">Product</th>
                                     <th style="width: 20%;">Rate</th>
-                                    <th style="width: 15%;">Quantity</th>
+                                    <th style="width: 10%;">GST</th>
+                                    <th style="width: 10%;">Quantity</th>
                                     <th style="width: 15%;">Total</th>
                                     <th style="width: 10%;"><a onclick="addRow()" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
                                 </tr>
@@ -112,7 +113,11 @@
                                         </div>
                                     </td>
                                     <td style="padding-left: 20px;">
-                                        <input type="text" name="rate[]" disabled id="rate1" autocomplete="off" class="form-control" />
+                                        <input type="text" name="rate[]" readonly id="rate1" autocomplete="off" class="form-control" />
+                                    </td>
+                                    <td style="padding-left: 20px;">
+                                    <input type="text" name="gst[]" readonly id="gst1" autocomplete="off" class="form-control" />
+                                        <input type="hidden" readonly id="gstpt1" />
                                     </td>
                                     <td style="padding-left: 20px;">
                                         <div class="form-group">
@@ -120,7 +125,7 @@
                                         </div>
                                     </td>
                                     <td style="padding-left: 20px;">
-                                        <input type="text" name="total[]" id="total1" autocomplete="off" class="form-control" disabled="true" />
+                                        <input type="text" name="total[]" id="total1" autocomplete="off" class="form-control" readonly="true" />
                                         <input type="hidden" name="totalValue[]" id="totalValue1" autocomplete="off" class="form-control" />
                                     </td>
                                     <td>
@@ -129,23 +134,74 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @error('productName.*') <b><span class="text-danger">{{ $message }}</span></b>@enderror
                     </div>
                     <!-- end tabel -->
-
-
-                            <!-- <div class="form-group row">
-                                <label  class="col-sm-2 col-form-label">Ststus</label>
-                                <div class="col-sm-10">
-                                      <select class="form-control " name="ststus">
-                                        <option selected="selected" value="available">Available</option>
-                                        <option value="not_Available">Not Available</option>
-                                        
-                                      </select>
-                                    @error('ststus')<span class="text-danger">{{ $message }}</span>@enderror
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
+                                <div>
+                                    <input type="text" class="form-control" id="subTotal" name="subTotal"  readonly />
                                 </div>
-                            </div> -->
-
-
+                            </div>
+                            <!--/form-group-->
+                            <div class="form-group">
+                                <label for="gstTotal" class="col-sm-3 control-label">Gst Total</label>
+                                <div>
+                                    <input type="text" class="form-control" id="gstTotal" name="gstTotal" readonly />
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                            <div class="form-group">
+                                <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
+                                <div>
+                                    <input type="text" class="form-control" id="totalAmount" name="totalAmount" readonly />
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
+                                <div>
+                                    <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                            <div class="form-group">
+                                <label for="due" class="col-sm-3 control-label">Due Amount</label>
+                                <div>
+                                    <input type="text" class="form-control" id="due" name="due" readonly />
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                            <div class="form-group">
+                                <label for="clientContact" class="col-sm-3 control-label">Payment Type</label>
+                                <div>
+                                    <select class="form-control" name="paymentType" id="paymentType">
+                                        <option value="">~~SELECT~~</option>
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Credit_Card">Credit Card</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                            <div class="form-group">
+                                <label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
+                                <div>
+                                    <select class="form-control" name="paymentStatus" id="paymentStatus">
+                                        <option value="">~~SELECT~~</option>
+                                        <option value="Full_Payment">Full Payment</option>
+                                        <option value="Advance_Payment">Advance Payment</option>
+                                        <option value="No_Payment">No Payment</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/form-group-->
+                    </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -167,23 +223,36 @@
 
 @section('js')
 <script>
+    $( document ).ready(function() {
+        $('input[name="Select_client"]:checked').each(function() {
+            if(this.value == "new_Client") {
+                document.getElementById("old_client_select").style.display = "none";
+                $('#c_name').removeAttr("readonly");
+                $('#client_contact').removeAttr("readonly");
+                $('#client_gst').removeAttr("readonly");
+                $('#client_addres').removeAttr("readonly");
+            }
+        });
+
+        
+    });
     $("#old_Client").click(function(){
         // alert("old");
         document.getElementById("old_client_select").style.display = null;
-        $('#c_name').attr('disabled', 'disabled');
-        $('#client_contact').attr('disabled', 'disabled');
-        $('#client_gst').attr('disabled', 'disabled');
-        $('#client_addres').attr('disabled', 'disabled');
+        $('#c_name').attr('readonly', 'readonly');
+        $('#client_contact').attr('readonly', 'readonly');
+        $('#client_gst').attr('readonly', 'readonly');
+        $('#client_addres').attr('readonly', 'readonly');
 
     });
 
     $("#new_Client").click(function(){
         // alert("new");
         document.getElementById("old_client_select").style.display = "none";
-        $('#c_name').removeAttr("disabled");
-        $('#client_contact').removeAttr("disabled");
-        $('#client_gst').removeAttr("disabled");
-        $('#client_addres').removeAttr("disabled");
+        $('#c_name').removeAttr("readonly");
+        $('#client_contact').removeAttr("readonly");
+        $('#client_gst').removeAttr("readonly");
+        $('#client_addres').removeAttr("readonly");
     });
 
     function getProductData(row = null) {
@@ -214,10 +283,14 @@
 					$("#quantity"+row).val(1);
 
 					var total = Number(response.rate) * 1;
+					var gst = Number(response.rate) / 100 * Number(response.GST);
 					total = total.toFixed(2);
+                    // alert(gst)gstpt
 					$("#total"+row).val(total);
+					$("#gst"+row).val(gst);
+					$("#gstpt"+row).val(response.GST);
 					$("#totalValue"+row).val(total);
-					// subAmount();
+					subAmount();
                 }
 			});
 		}
@@ -230,8 +303,11 @@
 function getTotal(row = null) {
 	if(row) {
 		var total = Number($("#rate"+row).val()) * Number($("#quantity"+row).val());
+        var gst = Number($("#rate"+row).val()) / 100 * Number($("#gstpt"+row).val()) * Number($("#quantity"+row).val());
+        // alert(gst)
 		total = total.toFixed(2);
 		$("#total"+row).val(total);
+		$("#gst"+row).val(gst);
 		$("#totalValue"+row).val(total);
 		
 		subAmount();
@@ -299,9 +375,13 @@ $.ajax({
                 '</div>'+
             '</td>'+
             '<td style="padding-left:20px;"">'+
-                '<input type="text" name="rate[]" disabled id="rate'+count+'" autocomplete="off" class="form-control" />'+
+                '<input type="text" name="rate[]" readonly id="rate'+count+'" autocomplete="off" class="form-control" />'+
                 '<input type="hidden" name="rateValue[]" id="rateValue'+count+'" autocomplete="off" class="form-control" />'+
             '</td style="padding-left:20px;">'+
+            '<td style="padding-left: 20px;">'+
+            '<input type="text" name="gst[]" readonly="" id="gst'+count+'" autocomplete="off" class="form-control">'+
+                '<input type="hidden" name="gst" readonly="" id="gstpt'+count+'">'+
+            '</td>'+
             '<td style="padding-left:20px;">'+
                 '<div class="form-group">'+
                 '<input type="text" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" autocomplete="off" class="form-control" min="1" />'+
@@ -320,10 +400,67 @@ $.ajax({
         } else {				
             $("#productTable tbody").append(tr);
         }		
-
+        $('.select2').select2();
     } // /success
 });	// get the product data
 
 } // /add row
+
+function subAmount() {
+	
+	var tableProductLength = $("#productTable tbody tr").length;
+	var totalSubAmount = 0;
+	var totalgst = 0;
+	for(x = 0; x < tableProductLength; x++) {
+		var tr = $("#productTable tbody tr")[x];
+		var count = $(tr).attr('id');
+		count = count.substring(3);
+
+		totalSubAmount = Number(totalSubAmount) + Number($("#total"+count).val());
+		totalgst = Number(totalgst) + Number($("#gst"+count).val());
+	} // /for
+    // alert(totalgst)
+	totalSubAmount = totalSubAmount.toFixed(2);
+
+	// sub total
+	$("#subTotal").val(totalSubAmount - totalgst);
+	$("#subTotalValue").val(totalSubAmount - totalgst);
+
+	
+	$("#gstTotal").val(totalgst);
+	
+
+	// total amount
+	var totalAmount = (Number($("#subTotal").val()) + Number(totalgst));
+	totalAmount = totalAmount.toFixed(2);
+	$("#totalAmount").val(totalAmount);
+	$("#totalAmountValue").val(totalAmount);
+
+	
+	var paidAmount = $("#paid").val();
+	if(paidAmount) {
+		paidAmount =  Number($("#totalAmount").val()) - Number(paidAmount);
+		paidAmount = paidAmount.toFixed(2);
+		$("#due").val(paidAmount);
+		$("#dueValue").val(paidAmount);
+	} else {	
+		$("#due").val($("#totalAmount").val());
+		$("#dueValue").val($("#totalAmount").val());
+	} // else
+
+} // /sub total amount
+
+function paidAmount() {
+	var grandTotal = $("#totalAmount").val();
+
+	if(grandTotal) {
+		var dueAmount = Number($("#totalAmount").val()) - Number($("#paid").val());
+		dueAmount = dueAmount.toFixed(2);
+		$("#due").val(dueAmount);
+		$("#dueValue").val(dueAmount);
+	} // /if
+} // /paid amoutn function
+
+
 </script>
 @endsection

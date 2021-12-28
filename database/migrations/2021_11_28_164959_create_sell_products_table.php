@@ -17,9 +17,9 @@ class CreateSellProductsTable extends Migration
             $table->id();
             $table->integer('sell_id');
             $table->integer('product_id');
-            $table->double('amount', 8, 2);
+            $table->double('totel_gst', 8, 2);
             $table->double('totel_amount', 8, 2);
-
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

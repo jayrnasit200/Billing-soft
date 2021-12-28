@@ -44,3 +44,5 @@ function delete_items(frm,id){
     setTimeout(function () {
         $("#msg").fadeOut("fast");
     }, 5000); // <-- time in milliseconds
+
+	
