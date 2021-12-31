@@ -10,15 +10,15 @@ class SellController extends Controller
 {
     public function index()
     {
-        $bills['bills'] = DB::table('add_bill')
-        ->join('payment', 'add_bill.payment_id', '=', 'payment.id')
-        ->select('add_bill.id','add_bill.client_name','add_bill.bill_no','add_bill.bill_date','add_bill.bill_gst','payment.amount','payment.Payment_ststus','add_bill.created_at')
+        $sell['sell'] = DB::table('sell')
+        ->join('sell_client', 'sell.client_id', '=', 'sell_client.id')
+        ->select('sell.id','sell_client.client_name','sell.totel_amount','sell.bill_date','sell.Payment_status','sell.created_at')
         ->get();
         // echo "<pre>";
-        // print_r($bills['bills']);
+        // print_r($sell['sell']);
         // exit;
-        $bills['title'] = 'Sell';
-        return view('sell/list')->with($bills);
+        $sell['title'] = 'Sell';
+        return view('sell/list')->with($sell);
     }
 
     //  public function delete()
@@ -41,7 +41,6 @@ class SellController extends Controller
     {
     //     echo "<pre>";
     //    print_r(request()->all());
-
     //    exit;
        
         $this->validate(request(), [
@@ -59,46 +58,55 @@ class SellController extends Controller
         // print_r(request()->Select_client);
         if(request()->Select_client == "new_Client"){
             // new
-            // $clinent_id = DB::table('sell_client')->insertGetId([
-            //                 'client_name' => request()->new_c_name,
-            //                 'client_Contact' => request()->client_contact,
-            //                 'client_address' => request()->client_addres,
-            //                 'client_gst_no' => request()->client_gst,
-            //                 'created_at' => current_date_time(),
-            //                 'updated_at' => current_date_time(),
-            //                 ]);
-            $clinent_id= "1" ;
+            $clinent_id = DB::table('sell_client')->insertGetId([
+                            'client_name' => request()->new_c_name,
+                            'client_Contact' => request()->client_contact,
+                            'client_address' => request()->client_addres,
+                            'client_gst_no' => request()->client_gst,
+                            'created_at' => current_date_time(),
+                            'updated_at' => current_date_time(),
+                            ]);
+            // $clinent_id= "1" ;
         }else{
             $clinent_id=request()->Client_name;
         }
-        // $payempt_id = DB::table('payment')->insertGetId([
-        //     'amount' => request()->totalAmount,
-        //     'system' => "credit",
-        //     'Payment_ststus' => "available",
-        //     'created_at' => current_date_time(),
-        //     'updated_at' => current_date_time(),
-        //     ]);
-        $clinent_id= "3" ;
+        $payempt_id = DB::table('payment')->insertGetId([
+            'amount' => request()->totalAmount,
+            'system' => "credit",
+            'Payment_ststus' => "available",
+            'created_at' => current_date_time(),
+            'updated_at' => current_date_time(),
+            ]);
+        // $payempt_id= "3" ;
             
-        // $payempt_id = DB::table('payment')->insertGetId([
-        //     'amount' => request()->totalAmount,
-        //     'system' => "credit",
-        //     'Payment_ststus' => "available",
-        //     'created_at' => current_date_time(),
-        //     'updated_at' => current_date_time(),
-        //     ]);
-       exit;
-        
-        // DB::table('add_bill')->insert([
-        //     'client_name' => request()->c_name,
-        //     'bill_no' => request()->bil_no,
-        //     'bill_gst' => request()->bill_gst,
-        //     'bill_date' => request()->bill_date,
-        //     'payment_id' => $payment_id,
-        //     'created_at' => current_date_time(),
-        //     'updated_at' => current_date_time(),
-        //     ]);
-        // return redirect('bill')->with('status', 'Bills Success Created');
+        $sell_id = DB::table('sell')->insertGetId([
+            'client_id' => $clinent_id,
+            'bill_date' => request()->sell_date,
+            'payment_id' => $payempt_id,
+            'sum_amount' => request()->subTotal,
+            'Gst_Total' => request()->gstTotal,
+            'Paid_amount' => request()->paid,
+            'Due_Total' => request()->due,
+            'totel_amount' => request()->totalAmount,
+            'Payment_type' => request()->paymentType,
+            'Payment_status' => request()->paymentStatus,
+            'created_at' => current_date_time(),
+            'updated_at' => current_date_time(),
+            ]);
+        // $sell_id= "2" ;
+
+        foreach(request()->productName as $x => $val){
+             DB::table('sell_products')->insert([
+            'sell_id' =>  $sell_id,
+            'product_id' => $val,
+            'totel_gst' => request()->gst[$x],
+            'totel_amount' => request()->total[$x],
+            'quantity' => request()->quantity[$x],
+            'created_at' => current_date_time(),
+            'updated_at' => current_date_time(),
+            ]);
+        }
+        return redirect('sell')->with('status', 'Selling Bill Success Created');
 
     }
     // public function edit($id)

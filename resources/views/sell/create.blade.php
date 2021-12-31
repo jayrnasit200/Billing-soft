@@ -380,7 +380,7 @@ $.ajax({
             '</td style="padding-left:20px;">'+
             '<td style="padding-left: 20px;">'+
             '<input type="text" name="gst[]" readonly="" id="gst'+count+'" autocomplete="off" class="form-control">'+
-                '<input type="hidden" name="gst" readonly="" id="gstpt'+count+'">'+
+                '<input type="hidden" readonly="" id="gstpt'+count+'">'+
             '</td>'+
             '<td style="padding-left:20px;">'+
                 '<div class="form-group">'+

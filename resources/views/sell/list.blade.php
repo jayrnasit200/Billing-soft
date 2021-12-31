@@ -26,12 +26,10 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>Brand Name</th>
+                    <th>Order Date</th>
                     <th>client Name</th>
-                    <th>Bill Date</th>
-                    <th>Gst No</th>
-                    <th>amount</th>
-                    <th>Payment Ststus</th>
+                    <th>Order Amount</th>
+                    <th>Payment Status</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -39,19 +37,18 @@
                   $delete_action="bill/delete";
                    @endphp
                   <tbody>
-                  @foreach($bills as $valu)
+                  @foreach($sell as $valu)
                  <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$valu->bill_no}}</td>
-                    <td>{{$valu->client_name}}</td>
                     <td>{{$valu->bill_date}}</td>
-                    <td>{{$valu->bill_gst}}</td>
-                    <td>{{$valu->amount}}</td>
-                    <td>{{$valu->Payment_ststus}}</td>
+                    <td>{{$valu->client_name}}</td>
+                    <td>{{$valu->totel_amount}}</td>
+                    <td>{{$valu->Payment_status}}</td>
                     <td> <a class="btn btn-default dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{url('bill/edit',$valu->id)}}"><i class="far fa-edit"></i> Edit</a>
-                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','Bile No :{{$valu->bill_no}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
+                              <a class="dropdown-item" href="{{url('bill/sell_print',$valu->id)}}"><i class="fas fa-download"></i> Print</a>
+                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','Client Name :{{$valu->client_name}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
                             </div>
                         </td>
                   </tr>
@@ -60,7 +57,6 @@
                   
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
             </div>
         </div>
