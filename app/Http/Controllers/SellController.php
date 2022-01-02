@@ -20,7 +20,18 @@ class SellController extends Controller
         $sell['title'] = 'Sell';
         return view('sell/list')->with($sell);
     }
-
+    public function invoice($id)
+    {
+        $sell['sell'] = DB::table('sell')
+        ->join('sell_client', 'sell.client_id', '=', 'sell_client.id')
+        ->select('sell.id','sell_client.client_name','sell.totel_amount','sell.bill_date','sell.Payment_status','sell.created_at')
+        ->get();
+        // echo "<pre>";
+        // print_r($sell['sell']);
+        // exit;
+        $sell['title'] = 'Sell';
+        return view('sell/invoice')->with($sell); 
+    }
     //  public function delete()
     // {
     //     // print_r(request()->id);

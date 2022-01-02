@@ -84,11 +84,10 @@
                                     @error('client_addres')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
-
+                
                             
                     <!-- start tabel -->
                     <div class="row">
-                        
                         <table class="table" id="productTable">
                             <thead>
                                 <tr>
@@ -100,39 +99,78 @@
                                     <th style="width: 10%;"><a onclick="addRow()" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr id="row1" class="0">
-                                    <td style="margin-left: 20px;">
-                                        <div class="form-group">
-                                            <select class="form-control select2" name="productName[]" id="productName1" onchange="getProductData(1)">
-                                                <option value="">~~SELECT~~</option>
-                                                @foreach(get_all_products() as $valu)
-                                                <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}">{{ $valu->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="padding-left: 20px;">
-                                        <input type="text" name="rate[]" readonly id="rate1" autocomplete="off" class="form-control" />
-                                    </td>
-                                    <td style="padding-left: 20px;">
-                                    <input type="text" name="gst[]" readonly id="gst1" autocomplete="off" class="form-control" />
-                                        <input type="hidden" readonly id="gstpt1" />
-                                    </td>
-                                    <td style="padding-left: 20px;">
-                                        <div class="form-group">
-                                            <input type="text" name="quantity[]" id="quantity1" onkeyup="getTotal(1)" autocomplete="off" class="form-control" min="1" />
-                                        </div>
-                                    </td>
-                                    <td style="padding-left: 20px;">
-                                        <input type="text" name="total[]" id="total1" autocomplete="off" class="form-control" readonly="true" />
-                                        <input type="hidden" name="totalValue[]" id="totalValue1" autocomplete="off" class="form-control" />
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(1)"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                           
+                                @if(old('productName'))
+                                    <tbody>
+                                        @foreach(old('productName') as $key=>$val)
+                                            <tr id="row{{ $key }}" class="0">
+                                                <td style="margin-left: 20px;">
+                                                    <div class="form-group">
+                                                        <select class="form-control select2" name="productName[]" id="productName{{ $key }}" onchange="getProductData({{ $key }})">
+                                                            <option value="">~~SELECT~~</option>
+                                                            @foreach(get_all_products() as $valu)
+                                                            <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}" @if($val == $valu->id) selected @endif>{{ $valu->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 20px;">
+                                                    <input type="text" name="rate[]" readonly id="rate{{ $key }}" value="{{ old('rate')[$key] ?? '' }}" autocomplete="off" class="form-control" />
+                                                </td>
+                                                <td style="padding-left: 20px;">
+                                                <input type="text" name="gst[]" readonly id="gst{{ $key }}" value="{{ old('gst')[$key] ?? '' }}" autocomplete="off" class="form-control" />
+                                                    <input type="hidden" readonly id="gstpt{{ $key }}" />
+                                                </td>
+                                                <td style="padding-left: 20px;">
+                                                    <div class="form-group">
+                                                        <input type="text" name="quantity[]" id="quantity{{ $key }}" value="{{ old('quantity')[$key] ?? '' }}" onkeyup="getTotal({{ $key }})" autocomplete="off" class="form-control" min="1" />
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 20px;">
+                                                    <input type="text" name="total[]" id="total{{ $key }}" value="{{ old('total')[$key] ?? '' }}" autocomplete="off" class="form-control" readonly="true" />
+                                                    <input type="hidden" name="totalValue[]" value="{{ old('totalValue')[$key] ?? '' }}" id="totalValue{{ $key }}" autocomplete="off" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow({{ $key }})"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @else
+                                    <tbody>
+                                        <tr id="row50" class="0">
+                                            <td style="margin-left: 20px;">
+                                                <div class="form-group">
+                                                    <select class="form-control select2" name="productName[]" id="productName50" onchange="getProductData(50)">
+                                                        <option value="">~~SELECT~~</option>
+                                                        @foreach(get_all_products() as $valu)
+                                                        <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}">{{ $valu->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <input type="text" name="rate[]" readonly id="rate50" autocomplete="off" class="form-control" />
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                            <input type="text" name="gst[]" readonly id="gst50" autocomplete="off" class="form-control" />
+                                                <input type="hidden" readonly id="gstpt50" />
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <div class="form-group">
+                                                    <input type="text" name="quantity[]" id="quantity50" onkeyup="getTotal(50)" autocomplete="off" class="form-control" min="1" />
+                                                </div>
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <input type="text" name="total[]" id="total50" autocomplete="off" class="form-control" readonly="true" />
+                                                <input type="hidden" name="totalValue[]" id="totalValue50" autocomplete="off" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(50)"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                @endif
                         </table>
                         @error('productName.*') <b><span class="text-danger">{{ $message }}</span></b>@enderror
                     </div>
@@ -142,21 +180,21 @@
                             <div class="form-group">
                                 <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
                                 <div>
-                                    <input type="text" class="form-control" id="subTotal" name="subTotal"  readonly />
+                                    <input type="text" class="form-control" id="subTotal" value="{{ old('subTotal') }}" name="subTotal"  readonly />
                                 </div>
                             </div>
                             <!--/form-group-->
                             <div class="form-group">
                                 <label for="gstTotal" class="col-sm-3 control-label">Gst Total</label>
                                 <div>
-                                    <input type="text" class="form-control" id="gstTotal" name="gstTotal" readonly />
+                                    <input type="text" class="form-control" id="gstTotal" value="{{ old('gstTotal') }}" name="gstTotal" readonly />
                                 </div>
                             </div>
                             <!--/form-group-->
                             <div class="form-group">
                                 <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
                                 <div>
-                                    <input type="text" class="form-control" id="totalAmount" name="totalAmount" readonly />
+                                    <input type="text" class="form-control" id="totalAmount" value="{{ old('totalAmount') }}" name="totalAmount" readonly />
                                 </div>
                             </div>
                             <!--/form-group-->
@@ -166,14 +204,14 @@
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
                                 <div>
-                                    <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
+                                    <input type="text" class="form-control" id="paid" value="{{ old('paid') }}" name="paid" autocomplete="off" onkeyup="paidAmount()" />
                                 </div>
                             </div>
                             <!--/form-group-->
                             <div class="form-group">
                                 <label for="due" class="col-sm-3 control-label">Due Amount</label>
                                 <div>
-                                    <input type="text" class="form-control" id="due" name="due" readonly />
+                                    <input type="text" class="form-control" value="{{ old('due') }}" id="due" name="due" readonly />
                                 </div>
                             </div>
                             <!--/form-group-->
@@ -182,9 +220,9 @@
                                 <div>
                                     <select class="form-control" name="paymentType" id="paymentType">
                                         <option value="">~~SELECT~~</option>
-                                        <option value="Cheque">Cheque</option>
-                                        <option value="Cash">Cash</option>
-                                        <option value="Credit_Card">Credit Card</option>
+                                        <option value="Cheque" {{ (old("paymentType") == "Cheque" ? "selected":"") }}>Cheque</option>
+                                        <option value="Cash" {{ (old("paymentType") == "Cash" ? "selected":"") }}>Cash</option>
+                                        <option value="Credit_Card" {{ (old("paymentType") == "Credit_Card" ? "selected":"") }}>Credit Card</option>
                                     </select>
                                 </div>
                             </div>
@@ -194,9 +232,9 @@
                                 <div>
                                     <select class="form-control" name="paymentStatus" id="paymentStatus">
                                         <option value="">~~SELECT~~</option>
-                                        <option value="Full_Payment">Full Payment</option>
-                                        <option value="Advance_Payment">Advance Payment</option>
-                                        <option value="No_Payment">No Payment</option>
+                                        <option value="Full_Payment" {{ (old("paymentStatus") == "Full_Payment" ? "selected":"") }}>Full Payment</option>
+                                        <option value="Advance_Payment" {{ (old("paymentStatus") == "Advance_Payment" ? "selected":"") }}>Advance Payment</option>
+                                        <option value="No_Payment" {{ (old("paymentStatus") == "No_Payment" ? "selected":"") }}>No Payment</option>
                                     </select>
                                 </div>
                             </div>
@@ -345,7 +383,7 @@ if(tableLength > 0) {
     arrayNumber = Number(arrayNumber) + 1;					
 } else {
     // no table row
-    count = 1;
+    count = 51;
     arrayNumber = 0;
 }
 $.ajaxSetup({

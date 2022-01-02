@@ -46,8 +46,8 @@
                     <td>{{$valu->Payment_status}}</td>
                     <td> <a class="btn btn-default dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{url('bill/edit',$valu->id)}}"><i class="far fa-edit"></i> Edit</a>
-                              <a class="dropdown-item" href="{{url('bill/sell_print',$valu->id)}}"><i class="fas fa-download"></i> Print</a>
+                              <a class="dropdown-item" href="{{url('sell/edit',$valu->id)}}"><i class="far fa-edit"></i> Edit</a>
+                              <a class="dropdown-item" href="{{url('sell/sell_print',$valu->id)}}"><i class="fas fa-download"></i> Print</a>
                               <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','Client Name :{{$valu->client_name}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
                             </div>
                         </td>
