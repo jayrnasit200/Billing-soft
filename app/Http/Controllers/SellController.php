@@ -24,8 +24,8 @@ class SellController extends Controller
     {
         $sell['sell'] = DB::table('sell')
         ->join('sell_client', 'sell.client_id', '=', 'sell_client.id')
-        ->select('sell.id','sell_client.client_name','sell.totel_amount','sell.bill_date','sell.Payment_status','sell.created_at')
-        ->get();
+        ->select('sell.id','sell_client.client_name','sell_client.client_Contact','sell_client.client_address','sell_client.client_gst_no','sell.totel_amount','sell.sum_amount','sell.Gst_Total','sell.bill_date','sell.Payment_status','sell.Payment_type','sell.created_at')
+        ->get()->first();
         // echo "<pre>";
         // print_r($sell['sell']);
         // exit;

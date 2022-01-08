@@ -46,7 +46,9 @@
                                 <div class="col-sm-10">
                                       <select class="form-control select2" name="Client_name">
                                       <option value="" selected>Select Client</option>
-                                      <option value="111" >jay</option>
+                                      @foreach(get_all_sellr_Client() as $val)
+                                      <option value="{{$val->id}}" >{{$val->client_name}} (GST: {{$val->client_gst_no}})</option>
+                                      @endforeach
                                       </select>
                                     @error('Client_name')
                                     <span class="text-danger">{{ $message }}</span>@enderror
@@ -426,8 +428,8 @@ $.ajax({
                 '</div>'+
             '</td>'+
             '<td style="padding-left:20px;">'+
-                '<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control"/>'+
-                '<input type="hidden" name="totalValue[]" id="totalValue'+count+'" autocomplete="off" class="form-control" />'+
+                '<input type="text" name="total[]" id="total'+count+'" readonly="true" autocomplete="off" class="form-control"/>'+
+                '<input type="hidden" name="totalValue[]" id="totalValue'+count+'" readonly="true" autocomplete="off" class="form-control" />'+
             '</td>'+
             '<td>'+
                 '<button class="btn btn-default removeProductRowBtn" type="button" onclick="removeProductRow('+count+')"><i class="fas fa-trash-alt"></i></button>'+

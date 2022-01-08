@@ -34,6 +34,33 @@
 		    }
 		}
 		
-		
+		if (!function_exists('get_all_sellr_Client')) {
+		    function get_all_sellr_Client()
+		    {
+		        return DB::table('sell_client')->select('id','client_name','client_gst_no','client_Contact','client_address')->get();
+		    }
+		}
+		if (!function_exists('sys_config_all')) {
+		    function sys_config_all()
+		    {
+		        $config_data = DB::table('system_config')->get()->all();
+		        $result = [];
+		        foreach ($config_data as $val) {
+		            $result[$val->option] = $val->value;
+		        }
+		        return $result;
+		    }
+		}
+
+		if (!function_exists('sys_config')) {
+		    function sys_config($option)
+		    {
+		        $value =DB::table('system_config')->select('value')
+		            ->where('option', '=', $option)
+		            ->get()
+		            ->first()->value;
+		        return $value;
+		    }
+		}
 		
 ?>

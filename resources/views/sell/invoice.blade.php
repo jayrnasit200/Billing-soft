@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- <script src="js/bootstrap.min.js"></script>
  --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -101,7 +100,7 @@ page[size="A5"][layout="landscape"] {
         <div class="col-xs-12" style="border: 1px solid;">
             <center>
             <div class="invoice-title">
-                <h2 style="margin: 5px 34px;"><b>username</b></h2>
+                <h2 style="margin: 5px 34px;">{{sys_config('site_name')}}</h2>
             </div>
             </center>
             <div class="row" style="border-top: 1px solid;">
@@ -109,18 +108,20 @@ page[size="A5"][layout="landscape"] {
                 <div class="col-xs-5" style="border-right: 1px solid;height: 70px;">
                     <address>
                        <!--  <strong>Sky Cooling System</strong><br> -->
-                        <strong>Address :- </strong><span>Address</span><br>
-                        <strong>Mobile No :-</strong><b>mobile</b><br>
-                        <strong>GST NO :- </strong><b>gst</b><br>
+                        <strong>Mobile No :-</strong>{{sys_config('mobile')}}<br>
+                        <strong>GST NO :- </strong>{{sys_config('GST')}}<br>
+                        <strong>Address :- </strong>{{sys_config('address')}}<br>
+
                     </address>
                 </div>
                 <div class="col-xs-4"style="border-right: 1px solid;height: 70px;">
                     <address>
                         <strong>Customer</strong><br>
-                        <strong>Name :- </strong><b>client_name</b><br>
-                        <strong>Address :- </strong><b>client_add</b><br>
-                        <strong>Mobile No :-</strong><b>client_contact</b><br>
-                        <strong>GST :- </strong><b>client_Gst</b><br>
+                        <strong>Name :- </strong>{{ $sell->client_name }}<br>
+                        <strong>Mobile No :-</strong>{{ $sell->client_Contact }}<br>
+                        <strong>GST :- </strong>{{ $sell->client_gst_no }}<br>
+                        <strong>Address :- </strong>{{ $sell->client_address }}<br>
+
                     </address>
                 </div>
                 <div class="col-xs-3 text-right" style="/* border-top: 1px solid; */height: 70px;padding: 2px;">
@@ -128,16 +129,16 @@ page[size="A5"][layout="landscape"] {
                         <table  border="0">
                             <tr>
                                 <th>Invoice No : </th>
-                                <td><b>billno</b></td>                                
+                                <td>{{ $sell->id }}</td>                                
                             </tr>
                             <tr>
                                 
                                 <th>Invoice Date : </th>
-                                <td><b>order_date</b></td>
+                                <td>{{ $sell->bill_date }}</td>
                             </tr>
                             <tr>
                                 <th>Paymet Method : </th>
-                                <td>cash</td>
+                                <td> {{ $sell->Payment_type }}</td>
                             </tr>
                         </table>
                     
@@ -201,22 +202,22 @@ page[size="A5"][layout="landscape"] {
                                 <tr style="border-top: 1px solid;">                                 
                                     <td class="no-line" colspan="8" ><strong>Bank Details :-</strong></td>
                                     <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                    <td class="thick-line text-right" style="border: none;"><b>sub_total</b></td>
+                                    <td class="thick-line text-right" style="border: none;">{{ $sell->sum_amount }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="no-line" colspan="8"><strong>Bank Name :-</strong><b>bank_name</b></td>
-                                    <td class="no-line text-center"><strong>IGST <b>sgst</b></strong></td>
-                                    <td class="no-line text-right" style="border: none;"><b>gst_count_total</b></td>
+                                    <td class="no-line" colspan="8"><strong>Bank Name :- </strong>{{sys_config('bank_name')}}</td>
+                                    <td class="no-line text-center"><strong>GST</strong></td>
+                                    <td class="no-line text-right" style="border: none;">{{ $sell->Gst_Total }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="no-line" colspan="8"><strong>Bank Ac :-</strong><b>bank_ac</b></td>
-                                    <td class="no-line text-center"><strong>---------- <b>cgst</b></strong></td>
-                                    <td class="no-line text-right" style="border: none;"><strong>-----------</strong><b> </b></td>
+                                    <td class="no-line" colspan="8"><strong>Bank Ac :- </strong>{{sys_config('bank_ac')}}</td>
+                                    <td class="no-line text-center"><strong></td>
+                                    <td class="no-line text-right" style="border: none;"></td>
                                 </tr>
                                 <tr>
-                                    <td class="no-line" colspan="8"><strong>Bank IFSC Code :-</strong><b>Bank_IFSC_Code</b></td>
+                                <td class="no-line" colspan="8"><strong>Bank IFSC Code :- </strong>{{sys_config('Bank_IFSC_Code')}}</td>
                                     <td class="no-line text-center"><strong>Total Amount</strong></td>
-                                    <td class="no-line text-right" style="border: none;"><b>sub_total (total_amount)</b></td>
+                                    <td class="no-line text-right" style="border: none;">{{ $sell->totel_amount }}</td>
                                 </tr>
 
                               
@@ -230,8 +231,8 @@ page[size="A5"][layout="landscape"] {
                 <div class="row"style="margin: 0;">
 
                 <div class="col-xs-8" style="border-top: 1px solid;border-bottom: 1px solid;height: 45px;">
-                    <strong>Description</strong><br>
-                    <b>Description</b>
+                    <strong>{{sys_config('Description1')}}</strong><br>
+                    <strong>{{sys_config('Description2')}}</strong><br>
                 </div>
                 <div class="col-xs-4 text-right" style="border-bottom: 1px solid;border-left: 1px solid;border-top: 1px solid;height: 45px;">
                     
