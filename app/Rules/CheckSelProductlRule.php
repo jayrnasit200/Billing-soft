@@ -26,7 +26,7 @@ class CheckSelProductlRule implements Rule
      */
     public function passes($attribute, $value )
     {
-        echo "<pre>";
+        // echo "<pre>";
         // print_r(request()->all());
         foreach(request()->productName as $x => $val){
             $pro_qt=DB::table('product')->where('id', $val)->first();

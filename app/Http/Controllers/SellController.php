@@ -22,12 +22,18 @@ class SellController extends Controller
     }
     public function invoice($id)
     {
-        $sell['sell'] = DB::table('sell')
+        $sell['sell'] = DB::table('sell')->where('sell.id', $id)
         ->join('sell_client', 'sell.client_id', '=', 'sell_client.id')
         ->select('sell.id','sell_client.client_name','sell_client.client_Contact','sell_client.client_address','sell_client.client_gst_no','sell.totel_amount','sell.sum_amount','sell.Gst_Total','sell.bill_date','sell.Payment_status','sell.Payment_type','sell.created_at')
         ->get()->first();
+
+        $sell['product'] = DB::table('sell_products')->where('sell_products.sell_id', $id)
+        ->join('product', 'sell_products.product_id', '=', 'product.id')
+        ->select('sell_products.id','sell_products.totel_gst','sell_products.totel_amount','sell_products.quantity','product.name','product.HSN','product.rate')
+        ->get();
+
         // echo "<pre>";
-        // print_r($sell['sell']);
+        // print_r($sell['product']);
         // exit;
         $sell['title'] = 'Sell';
         return view('sell/invoice')->with($sell); 
@@ -116,6 +122,11 @@ class SellController extends Controller
             'created_at' => current_date_time(),
             'updated_at' => current_date_time(),
             ]);
+            $pro_qt=DB::table('product')->where('id', $val)->first();
+            $new_qty = $pro_qt->quantity - request()->quantity[$x];
+            $pro_qt=DB::table('product')->where('id', $val)->update([
+                            'quantity' => $new_qty,
+                            ]);
         }
         return redirect('sell')->with('status', 'Selling Bill Success Created');
 
