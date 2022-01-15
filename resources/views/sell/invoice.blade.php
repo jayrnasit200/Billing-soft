@@ -178,23 +178,24 @@ page[size="A5"][layout="landscape"] {
                             <thead>
                                 
                                     <tr style="border-bottom: 1px solid black;background: antiquewhite;">
-                                        <td style="text-align: center;"><strong>No</strong></td>
-                                        <td><strong>Item</strong></td>
-                                        <td class="text-center"><strong>HSN</strong></td>
-                                        <td class="text-center"><strong>Qty</strong></td>
-                                        <td class="text-center"><strong>Amounts</strong></td>
-                                        <td class="text-center"><strong>Taxes</strong></td>
-                                        <td class="text-center"><strong>MRP</strong></td>
-                                        <td style="border: none;" class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+                                        <td style="text-align: center; width: 5%;"><strong>No</strong></td>
+                                        <td ><strong>Item</strong></td>
+                                        <td style="width: 10%;" class="text-center"><strong>HSN</strong></td>
+                                        <td style="width: 10%;" class="text-center"><strong>Qty</strong></td>
+                                        <td style="width: 10%;" class="text-center"><strong>Amounts</strong></td>
+                                        <td style="width: 10%;" class="text-center"><strong>Taxes</strong></td>
+                                        <td style="width: 10%;" class="text-center"><strong>MRP</strong></td>
+                                        <td style="border: none; width: 10%;" class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
                                     </tr>
                                     
                             </thead>
                             <tbody>
                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                @php $no=1;@endphp
                                 @foreach($product as $val)
                                 <tr>
-                                    <td style="text-align: center;"><b>id</b></td>
-                                    <td>{{ $val->name}}</td>
+                                    <td style="text-align: center;">{{$no++}}</td>
+                                    <td >{{ $val->name}}</td>
                                     <td class="text-center">{{ $val->HSN}}</td>
                                     <td class="text-center">{{ $val->quantity}}</td>
                                     <td class="text-center">{{ $val->totel_amount - $val->totel_gst}}</td>
@@ -203,16 +204,28 @@ page[size="A5"][layout="landscape"] {
                                     <td class="text-center" style="border: none;">{{ $val->totel_amount}}</td>
                                 </tr>
                                 @endforeach
-                                 <tr>
-                                    <td style="width: 4%;text-align: center;">&nbsp;</td>
+                                @if(!$no <= 15)
+                                @for ($i = 15-$no; $i >= 0; $i--)
+                                    <tr>
+                                        <td style="text-align: center;">&nbsp;</td>
+                                        <td class="text-center">&nbsp;</td>
+                                        <td class="text-center">&nbsp;</td>
+                                        <td class="text-right">&nbsp;</td>
+                                        <td class="text-center">&nbsp;</td>
+                                        <td class="text-center">&nbsp;</td>
+                                        <td class="text-right">&nbsp;</td>
+                                    </tr>
+                                @endfor
+                                @endif
+                                 <!-- <tr>
+                                    <td style="text-align: center;">&nbsp;</td>
                                     <td class="text-center">&nbsp;</td>
                                     <td class="text-center">&nbsp;</td>
                                     <td class="text-right">&nbsp;</td>
                                     <td class="text-center">&nbsp;</td>
                                     <td class="text-center">&nbsp;</td>
                                     <td class="text-right">&nbsp;</td>
-
-                                </tr>
+                                </tr> -->
                                
                                 
                                 <tr style="border-top: 1px solid;">                                 
@@ -235,10 +248,6 @@ page[size="A5"][layout="landscape"] {
                                     <td class="no-line text-center"><strong>Total Amount</strong></td>
                                     <td class="no-line text-right" style="border: none;">{{ $sell->totel_amount }}</td>
                                 </tr>
-
-                              
-
-
 
                             </tbody>
                         </table>

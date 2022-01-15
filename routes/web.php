@@ -53,5 +53,5 @@ Route::post('/getallproductdata', [App\Http\Controllers\SellController::class, '
 Route::get('/sell/create', [App\Http\Controllers\SellController::class, 'create']);
 Route::post('/sell/create_submit', [App\Http\Controllers\SellController::class, 'submit_create']);
 Route::get('/sell/sell_print/{id}', [App\Http\Controllers\SellController::class, 'invoice']);
-// Route::get('/sell/edit/{id}', [App\Http\Controllers\SellController::class, 'edit']);
-// Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 'submit_update']);
+Route::get('/sell/edit/{id}', [App\Http\Controllers\SellController::class, 'edit']);
+Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 'submit_update']);

@@ -15,6 +15,8 @@
                     <!-- /.card-header -->
                     <form class="form-horizontal" method="post" action="{{ url('/sell/create_submit') }}">
                         @csrf
+                        
+
                         <div class="card-body">
                         <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Order Date</label>
@@ -38,7 +40,6 @@
                                             <label class="custom-control-label" for="new_Client">New Client</label>
                                         </div>
                                         </div>
-                                        
                             </div>
 
                             <div class="form-group row" id="old_client_select">
@@ -47,7 +48,7 @@
                                       <select class="form-control select2" name="Client_name">
                                       <option value="" selected>Select Client</option>
                                       @foreach(get_all_sellr_Client() as $val)
-                                      <option value="{{$val->id}}" >{{$val->client_name}} (GST: {{$val->client_gst_no}})</option>
+                                      <option value="{{$val->id}}" @if ($val->id == old('Client_name')) selected="selected"  @endif>{{$val->client_name}} (GST: {{$val->client_gst_no}})</option>
                                       @endforeach
                                       </select>
                                     @error('Client_name')
@@ -222,9 +223,9 @@
                                 <div>
                                     <select class="form-control" name="paymentType" id="paymentType">
                                         <option value="">~~SELECT~~</option>
-                                        <option value="Cheque" {{ (old("paymentType") == "Cheque" ? "selected":"") }}>Cheque</option>
-                                        <option value="Cash" {{ (old("paymentType") == "Cash" ? "selected":"") }}>Cash</option>
-                                        <option value="Credit_Card" {{ (old("paymentType") == "Credit_Card" ? "selected":"") }}>Credit Card</option>
+                                        <option value="cheque" {{ (old("paymentType") == "cheque" ? "selected":"") }}>Cheque</option>
+                                        <option value="cash" {{ (old("paymentType") == "cash" ? "selected":"") }}>Cash</option>
+                                        <option value="credit_Card" {{ (old("paymentType") == "credit_Card" ? "selected":"") }}>Credit Card</option>
                                     </select>
                                 </div>
                             </div>
