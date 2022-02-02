@@ -113,7 +113,7 @@
                                                         <select class="form-control select2" name="productName[]" id="productName{{ $key }}" onchange="getProductData({{ $key }})">
                                                             <option value="">~~SELECT~~</option>
                                                             @foreach(get_all_products() as $valu)
-                                                            <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}" @if($val->product_id == $valu->id) selected @endif>{{ $valu->name }}</option>
+                                                            <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}" @if($val->product_id == $valu->id) selected="selected" @endif>{{ $valu->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
