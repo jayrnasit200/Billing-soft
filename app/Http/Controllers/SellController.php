@@ -40,10 +40,22 @@ class SellController extends Controller
     }
      public function delete()
     {
-        print_r(request()->id);
-       
-        exit;
-        return redirect('bill')->with('status', 'bill Success Deleted');;
+        $id = request()->id;
+        $sell = DB::table('sell')->where('id', $id)->get()->first();
+        print_r($sell);
+        DB::table('payment')->where('id', $sell->payment_id)->delete();
+        $sell_productslist = DB::table('sell_products')->where('sell_id', $id)->get();
+        foreach($sell_productslist as $x => $val){
+            
+           DB::table('sell_products')->where('id', $val->id)->delete();
+           $pro_qt=DB::table('product')->where('id', $val->product_id)->first();
+           $new_qty = $pro_qt->quantity + $val->quantity;
+           $pro_qt=DB::table('product')->where('id', $val->product_id)->update([
+                           'quantity' => $new_qty,
+                           ]);
+       }
+        DB::table('sell')->where('id', $id)->delete();
+        return redirect('bill')->with('status', 'Sell Success Deleted');;
     }
     public function create()
     {
@@ -212,11 +224,6 @@ class SellController extends Controller
             'created_at' => current_date_time(),
             'updated_at' => current_date_time(),
             ]);
-            $pro_qt=DB::table('product')->where('id', $val)->first();
-            $new_qty = $pro_qt->quantity - request()->quantity[$x];
-            $pro_qt=DB::table('product')->where('id', $val)->update([
-                            'quantity' => $new_qty,
-                            ]);
         }
         return redirect('sell')->with('status', 'Selling Bill Success updateed');
 

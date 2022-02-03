@@ -18,6 +18,7 @@ class CreateAddBillTable extends Migration
             $table->string('client_name');
             $table->string('bill_no');
             $table->date('bill_date');
+            $table->string('contact');
             $table->string('bill_gst');
             $table->integer('payment_id');
             $table->timestamps();

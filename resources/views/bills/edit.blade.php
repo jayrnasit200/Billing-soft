@@ -27,6 +27,14 @@
                             </div>
 
                             <div class="form-group row">
+                                <label  class="col-sm-2 col-form-label">Client contact</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control @error('c_contact') is-invalid @enderror" name="c_contact" placeholder="Client contact" value="{{ old('c_contact',$data->contact) }}" />
+                                    @error('c_contact')<span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Bill No</label>
                                 <div class="col-sm-10">
                                     <input type="text"  class="form-control @error('bil_no') is-invalid @enderror" name="bil_no" placeholder="Bill No" value="{{ old('bil_no',$data->bill_no) }}" />

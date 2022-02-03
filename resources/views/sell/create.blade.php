@@ -106,6 +106,7 @@
                                 @if(old('productName'))
                                     <tbody>
                                         @foreach(old('productName') as $key=>$val)
+                                        @php $key++; @endphp
                                             <tr id="row{{ $key }}" class="0">
                                                 <td style="margin-left: 20px;">
                                                     <div class="form-group">

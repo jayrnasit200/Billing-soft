@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 
+@section('css')
+<style>
+body{
+    overflow-x: hidden;
+}
+</style>
+
+@endsection
+
 @section('content')
 <!-- Content Header (Page header) -->
 
@@ -11,18 +20,18 @@
         <div class="row">
             <!-- box-1 -->
             <div class="col-lg-3">
-                <div class="card">
+                <div class="card bg-primary ">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
+                            <h3 class="card-title">Total Sales</h3>
                         </div>
                     </div>
                     <div class="small-box shadow-none">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$totale_sell}}</h3>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="ion ion-arrow-graph-up-right"></i>
                         </div>
                     </div>
                 </div>
@@ -30,15 +39,15 @@
             <!-- end box-1 -->
             <!-- box-2 -->
             <div class="col-lg-3">
-                <div class="card">
+                <div class="card bg-secondary">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
+                            <h3 class="card-title">Total Purchase</h3>
                         </div>
                     </div>
                     <div class="small-box shadow-none">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$totale_purchase}}</h3>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -49,18 +58,18 @@
             <!-- end box-2 -->
             <!-- box-3 -->
             <div class="col-lg-3">
-                <div class="card">
+                <div class="card bg-warning">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
+                            <h3 class="card-title">Total Profit</h3>
                         </div>
                     </div>
                     <div class="small-box shadow-none">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$total_profit}}</h3>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="ion ion-cash"></i>
                         </div>
                     </div>
                 </div>
@@ -68,18 +77,97 @@
             <!-- end box-3 -->
             <!-- box-4 -->
             <div class="col-lg-3">
-                <div class="card">
+                <div class="card bg-danger">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
+                            <h3 class="card-title">Happy Clients</h3>
                         </div>
                     </div>
                     <div class="small-box shadow-none">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$total_Clients}}</h3>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="ion ion-happy"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end box-4 -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+            <!-- box-1 -->
+            <div class="col-lg-3">
+                <div class="card bg-success ">
+                    <div class="card-header border-0">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Current Year Sales</h3>
+                        </div>
+                    </div>
+                    <div class="small-box shadow-none">
+                        <div class="inner">
+                            <h3>{{$current_sell}}</h3>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-social-usd"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end box-1 -->
+            <!-- box-2 -->
+            <div class="col-lg-3">
+                <div class="card bg-orange">
+                    <div class="card-header border-0">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Current Year Purchase</h3>
+                        </div>
+                    </div>
+                    <div class="small-box shadow-none">
+                        <div class="inner">
+                            <h3>{{$current_purchase}}</h3>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-clipboard"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end box-2 -->
+            <!-- box-3 -->
+            <div class="col-lg-3">
+                <div class="card bg-info">
+                    <div class="card-header border-0">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Total Brands</h3>
+                        </div>
+                    </div>
+                    <div class="small-box shadow-none">
+                        <div class="inner">
+                            <h3>{{$total_brand}}</h3>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pricetag"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end box-3 -->
+            <!-- box-4 -->
+            <div class="col-lg-3">
+                <div class="card bg-purple">
+                    <div class="card-header border-0">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Total Products</h3>
+                        </div>
+                    </div>
+                    <div class="small-box shadow-none">
+                        <div class="inner">
+                            <h3>{{$total_product}}</h3>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-tshirt-outline"></i>
                         </div>
                     </div>
                 </div>
@@ -235,22 +323,22 @@
             </div>
             <!-- /.col-md-6 -->
             <div class="col-lg-6">
-                <div class="card">
+            <div class="card">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Sales</h3>
+                            <h3 class="card-title">Online Store Visitors</h3>
                             <a href="javascript:void(0);">View Report</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">$18,230.00</span>
-                                <span>Sales Over Time</span>
+                                <span class="text-bold text-lg">820</span>
+                                <span>Visitors Over Time</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
-                                <span class="text-success"> <i class="fas fa-arrow-up"></i> 33.1% </span>
-                                <span class="text-muted">Since last month</span>
+                                <span class="text-success"> <i class="fas fa-arrow-up"></i> 12.5% </span>
+                                <span class="text-muted">Since last week</span>
                             </p>
                         </div>
                         <!-- /.d-flex -->
@@ -260,13 +348,13 @@
                                 <div class="chartjs-size-monitor-expand"><div class=""></div></div>
                                 <div class="chartjs-size-monitor-shrink"><div class=""></div></div>
                             </div>
-                            <canvas id="sales-chart" height="250" style="display: block; height: 200px; width: 572px;" width="715" class="chartjs-render-monitor"></canvas>
+                            <canvas id="visitors-chart" height="250" width="715" style="display: block; height: 200px; width: 572px;" class="chartjs-render-monitor"></canvas>
                         </div>
 
                         <div class="d-flex flex-row justify-content-end">
-                            <span class="mr-2"> <i class="fas fa-square text-primary"></i> This year </span>
+                            <span class="mr-2"> <i class="fas fa-square text-primary"></i> This Week </span>
 
-                            <span> <i class="fas fa-square text-gray"></i> Last year </span>
+                            <span> <i class="fas fa-square text-gray"></i> Last Week </span>
                         </div>
                     </div>
                 </div>
@@ -332,9 +420,5 @@
 @section('js')
         <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
-
-@endsection
-
-@section('scc')
 
 @endsection

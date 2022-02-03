@@ -34,7 +34,7 @@
                   </tr>
                   </thead>
                   @php $no=1;
-                  $delete_action="bill/delete";
+                  $delete_action="/sell/delete/";
                    @endphp
                   <tbody>
                   @foreach($sell as $valu)
@@ -48,7 +48,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{url('sell/edit',$valu->id)}}"><i class="far fa-edit"></i> Edit</a>
                               <a class="dropdown-item" href="{{url('sell/sell_print',$valu->id)}}"><i class="fas fa-download"></i> Print</a>
-                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','Client Name :{{$valu->client_name}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
+                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','Client Name: {{$valu->client_name}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
                             </div>
                         </td>
                   </tr>

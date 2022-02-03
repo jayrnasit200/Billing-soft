@@ -113,26 +113,27 @@
                                                         <select class="form-control select2" name="productName[]" id="productName{{ $key }}" onchange="getProductData({{ $key }})">
                                                             <option value="">~~SELECT~~</option>
                                                             @foreach(get_all_products() as $valu)
-                                                            <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}" @if($val->product_id == $valu->id) selected="selected" @endif>{{ $valu->name }}</option>
+                                                            <option value="{{ $valu->id }}" id="changeProduct{{ $valu->id }}" @if(old('productName')) {{$val == $valu->id ? 'selected':''}} >{{ $valu->name }} @else {{$val->product_id == $valu->id ? 'selected':''}} >{{ $valu->name }} @endif </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </td>
                                                 <td style="padding-left: 20px;">
-                                                    <input type="text" name="rate[]" readonly id="rate{{ $key }}" value="{{ old('rate')[$key] ?? $val->rate }}" autocomplete="off" class="form-control" />
+                                               
+                                                    <input type="text" name="rate[]" readonly id="rate{{ $key }}" value="@if(old('rate')) {{old('rate')[$key-1]}} @else {{$val->rate}} @endif" autocomplete="off" class="form-control" />
                                                 </td>
                                                 <td style="padding-left: 20px;">
-                                                <input type="text" name="gst[]" readonly id="gst{{ $key }}" value="{{ old('gst')[$key] ?? $val->totel_gst }}" autocomplete="off" class="form-control" />
+                                                <input type="text" name="gst[]" readonly id="gst{{ $key }}" value="{{ old('gst')[$key-1] ?? $val->totel_gst }}" autocomplete="off" class="form-control" />
                                                     <input type="hidden" readonly id="gstpt{{ $key }}" />
                                                 </td>
                                                 <td style="padding-left: 20px;">
                                                     <div class="form-group">
-                                                        <input type="text" name="quantity[]" id="quantity{{ $key }}" value="{{ old('quantity')[$key] ?? $val->quantity }}" onkeyup="getTotal({{ $key }})" autocomplete="off" class="form-control" min="1" />
+                                                        <input type="text" name="quantity[]" id="quantity{{ $key }}" value="{{ old('quantity')[$key-1] ?? $val->quantity }}" onkeyup="getTotal({{ $key }})" autocomplete="off" class="form-control" min="1" />
                                                     </div>
                                                 </td>
                                                 <td style="padding-left: 20px;">
-                                                    <input type="text" name="total[]" id="total{{ $key }}" value="{{ old('total')[$key] ?? $val->totel_amount }}" autocomplete="off" class="form-control" readonly="true" />
-                                                    <input type="hidden" name="totalValue[]" value="{{ old('totalValue')[$key] ?? $val->totel_amount }}" id="totalValue{{ $key }}" autocomplete="off" class="form-control" />
+                                                    <input type="text" name="total[]" id="total{{ $key }}" value="{{ old('total')[$key-1] ?? $val->totel_amount }}" autocomplete="off" class="form-control" readonly="true" />
+                                                    <input type="hidden" name="totalValue[]" value="{{ old('totalValue')[$key-1] ?? $val->totel_amount }}" id="totalValue{{ $key }}" autocomplete="off" class="form-control" />
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow({{ $key }})"><i class="fas fa-trash-alt"></i></button>

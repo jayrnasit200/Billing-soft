@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-
+Route::group(['middleware' => ['auth']], function() {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // brand
 Route::get('/brand', [App\Http\Controllers\BrandController::class, 'index'])->name('brand');
@@ -49,9 +48,14 @@ Route::post('/bill/update_submit', [App\Http\Controllers\AddBillsController::cla
 Route::get('/sell', [App\Http\Controllers\SellController::class, 'index'])->name('bills');
 Route::post('/getproductdata', [App\Http\Controllers\SellController::class, 'getproductdata']);
 Route::post('/getallproductdata', [App\Http\Controllers\SellController::class, 'getallproductdata']);
-// Route::post('/sell/delete/', [App\Http\Controllers\SellController::class, 'delete']);
+Route::post('/sell/delete/', [App\Http\Controllers\SellController::class, 'delete']);
 Route::get('/sell/create', [App\Http\Controllers\SellController::class, 'create']);
 Route::post('/sell/create_submit', [App\Http\Controllers\SellController::class, 'submit_create']);
 Route::get('/sell/sell_print/{id}', [App\Http\Controllers\SellController::class, 'invoice']);
 Route::get('/sell/edit/{id}', [App\Http\Controllers\SellController::class, 'edit']);
 Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 'submit_update']);
+
+// Report
+Route::get('/report', [App\Http\Controllers\ReportController::class, 'index']);
+Route::post('/report/get', [App\Http\Controllers\ReportController::class, 'report_get']);
+});

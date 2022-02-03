@@ -43,6 +43,7 @@ class AddBillsController extends Controller
         $this->validate(request(), [
             "bil_no" => "required|unique:add_bill,bill_no",
             "c_name" => "required",
+            "c_contact" => "required",
             "bill_date" => "required|date_format:Y-m-d",
             "bill_amount" => "required|numeric|min:0",
             "bill_gst" => "required",
@@ -50,7 +51,7 @@ class AddBillsController extends Controller
         ]);
         $payment_id = DB::table('payment')->insertGetId([
                 'amount' => request()->bill_amount,
-                'system' => 'credit',
+                'system' => 'debit',
                 'Payment_ststus' => request()->ststus,
                 'created_at' => current_date_time(),
                 'updated_at' => current_date_time(),
@@ -61,6 +62,7 @@ class AddBillsController extends Controller
             'bill_no' => request()->bil_no,
             'bill_gst' => request()->bill_gst,
             'bill_date' => request()->bill_date,
+            'contact' => request()->c_contact,
             'payment_id' => $payment_id,
             'created_at' => current_date_time(),
             'updated_at' => current_date_time(),
@@ -73,7 +75,7 @@ class AddBillsController extends Controller
         $bills['title'] = 'Brand Edit';
         $bills['data'] =DB::table('add_bill')->where('add_bill.id', request()->id)
         ->join('payment', 'add_bill.payment_id', '=', 'payment.id')
-        ->select('add_bill.id','add_bill.client_name','add_bill.bill_no','add_bill.bill_date','add_bill.bill_gst','add_bill.payment_id','payment.amount','payment.Payment_ststus','add_bill.created_at')
+        ->select('add_bill.id','add_bill.client_name','add_bill.bill_no','add_bill.contact','add_bill.bill_date','add_bill.bill_gst','add_bill.payment_id','payment.amount','payment.Payment_ststus','add_bill.created_at')
         ->first();
         // print_r($bills['data']);
         // exit;
@@ -88,6 +90,7 @@ class AddBillsController extends Controller
         $this->validate(request(), [
             "bil_no" => "required|unique:add_bill,bill_no,$id",
             "c_name" => "required",
+            "c_contact" => "required",
             "bill_date" => "required|date_format:Y-m-d",
             "bill_amount" => "required|numeric|min:0",
             "bill_gst" => "required",
@@ -102,6 +105,7 @@ class AddBillsController extends Controller
                 ]);
         DB::table('add_bill')->where('id', $id)->update([
             'client_name' => request()->c_name,
+            'contact' => request()->c_contact,
             'bill_no' => request()->bil_no,
             'bill_gst' => request()->bill_gst,
             'bill_date' => request()->bill_date,
