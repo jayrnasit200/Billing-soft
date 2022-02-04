@@ -30,6 +30,7 @@ class CreateSystemConfigTable extends Migration
             ['option'=>'Bank_IFSC_Code','value'=>'Rbi2050j'],
             ['option'=>'Description1','value'=>'If you have any questions about this invoice, please contact'],
             ['option'=>'Description2','value'=>'If you have any questions about this invoice, please contact'],
+            ['option'=>'show_quantity','value'=>'50'],
 
         ];
         DB::table('system_config')->insert($data);
