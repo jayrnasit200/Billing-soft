@@ -58,4 +58,9 @@ Route::post('/sell/update_submit', [App\Http\Controllers\SellController::class, 
 // Report
 Route::get('/report', [App\Http\Controllers\ReportController::class, 'index']);
 Route::post('/report/get', [App\Http\Controllers\ReportController::class, 'report_get']);
+
+Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting']);
+Route::post('/setting', [App\Http\Controllers\HomeController::class, 'setting_submit']);
+
+
 });

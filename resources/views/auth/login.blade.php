@@ -188,7 +188,7 @@ a {
          
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">Email Address</h6>
-                        </label>  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        </label>  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email','BG@bg.com') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -216,7 +216,7 @@ a {
             </div>
         </div>
         <div class="bg-blue py-4">
-            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2019. All rights reserved.</small>
+            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2"><b>Stock Management Software Made By <a href="https://bgtutorial.com/">BGtutorial.com</a>.</b> </small>
                 
             </div>
         </div>

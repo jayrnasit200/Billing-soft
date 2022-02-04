@@ -126,7 +126,7 @@ page[size="A5"][layout="landscape"] {
             </center>
             <div class="row" style="border-top: 1px solid;">
 
-                <div class="col-xs-5" style="border-right: 1px solid;height: 70px;">
+                <div class="col-xs-5" style="border-right: 1px solid;height: 90px;">
                     <address>
                        <!--  <strong>Sky Cooling System</strong><br> -->
                         <strong>Mobile No :-</strong>{{sys_config('mobile')}}<br>
@@ -135,7 +135,7 @@ page[size="A5"][layout="landscape"] {
 
                     </address>
                 </div>
-                <div class="col-xs-4"style="border-right: 1px solid;height: 70px;">
+                <div class="col-xs-4"style="border-right: 1px solid;height: 90px;">
                     <address>
                         <strong>Customer</strong><br>
                         <strong>Name :- </strong>{{ $sell->client_name }}<br>
@@ -145,7 +145,7 @@ page[size="A5"][layout="landscape"] {
 
                     </address>
                 </div>
-                <div class="col-xs-3 text-right" style="/* border-top: 1px solid; */height: 70px;padding: 2px;">
+                <div class="col-xs-3 text-right" style="/* border-top: 1px solid; */height: 90px;padding: 2px;">
                     
                         <table  border="0">
                             <tr>

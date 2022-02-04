@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 
         DB::table('users')->insert( [
                'shop_name'=>'Admin',
-               'email'=>'admin@shreehari.net',
+               'email'=>'BG@bg.com',
                'password'=> bcrypt('123456'),
                'description'=>'description',
                'address'=>'address',

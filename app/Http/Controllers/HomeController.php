@@ -50,4 +50,36 @@ class HomeController extends Controller
         $des['title'] = 'Dashboard';
         return view('home')->with($des);
     }
+    public function setting()
+    {
+        $data['title']='Setting';
+        return view('setting')->with($data);
+    }
+    public function setting_submit()
+    {
+        // echo "<pre>";
+    	// print_r(Request()->all());
+        // exit;
+    	$this->validate(request(), [
+            "site_name" => "required",
+            "mobile" => "required",
+            "GST" => "required",
+            "Sell_biill_start" => "required|numeric",
+            "bank_name" => "required",
+            "bank_ac" => "required",
+            "Bank_IFSC_Code" => "required",
+            "Description1" => "required",
+            "Description2" => "required",
+            "show_quantity" => "required|numeric",
+            "address" => "required",
+        ]);
+
+    	$data = array('site_name', 'mobile', 'GST', 'phoSell_biill_startne','bank_name','bank_ac','Bank_IFSC_Code','Description1','Description2','show_quantity','address');
+		foreach ($data as $val) {
+			DB::table('system_config')
+				->where('option', $val)
+				->update(['value' => request()->$val]);
+		}
+		return Redirect('setting')->with('status', 'Settings updated successfully.');
+    }
 }
