@@ -26,7 +26,7 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>Brand Name</th>
+                    <th>Bill No</th>
                     <th>client Name</th>
                     <th>Bill Date</th>
                     <th>Gst No</th>

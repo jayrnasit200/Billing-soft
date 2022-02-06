@@ -15,7 +15,7 @@ class CreatePaymentTable extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->double('amount', 8, 2);
+            $table->double('amount', 20, 2);
             $table->enum('system',['debit','credit']);
             $table->enum('Payment_ststus', ['available', 'not_Available']);
 

@@ -167,9 +167,9 @@ class SellController extends Controller
             "client_contact" => "required_if:Select_client,==,new_Client",
             "client_gst" => "required_if:Select_client,==,new_Client",
             "client_addres" => "required_if:Select_client,==,new_Client",
-            'productName.*' => [ "required",
-                new CheckSelProductlRule()
-            ]
+            // 'productName.*' => [ "required",
+            //     new CheckSelProductlRule()
+            // ]
         ],[
             'productName.*.required' => 'The product field is required',
         ]);

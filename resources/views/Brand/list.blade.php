@@ -45,7 +45,7 @@
                     <td> <a class="btn btn-default dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{url('brand/edit',$valu->id)}}"><i class="far fa-edit"></i> Edit</a>
-                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','{{$valu->name}}','{{$delete_action}}')" ><i class="far fa-trash-alt"></i> Delete</button>
+                              <button class="dropdown-item" onClick="confirmDelete('{{$valu->id}}','{{$valu->name}}','{{url($delete_action)}}')" ><i class="far fa-trash-alt"></i> Delete</button>
                             </div>
                         </td>
                   </tr>
